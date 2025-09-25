@@ -1,0 +1,8 @@
+Document1 This is a sample document containing words
+Document2 Another document that also has words
+Document3 Sample text with different words
+Document4 I love having a document with words
+Document5 Sample documents with words are my favorite
+Document6 Me and the bestie which is just a sample document with words
+Document7 When I was a child all I wanted was to make a text input document
+Document8 On this great day I have achieved my dream
