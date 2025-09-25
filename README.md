@@ -42,7 +42,7 @@ mvn clean package
 Copy the JAR file to the Hadoop ResourceManager container:
 
 ```bash
-docker cp target/WordCountUsingHadoop-0.0.1-SNAPSHOT.jar resourcemanager:/opt/hadoop-3.2.1/share/hadoop/mapreduce/
+docker cp target/DocumentSimilarity-0.0.1-SNAPSHOT.jar resourcemanager:/opt/hadoop-3.2.1/share/hadoop/mapreduce/
 ```
 
 ### 5. **Move Dataset to Docker Container**
@@ -86,7 +86,7 @@ hadoop fs -put ./input.txt /input/data
 Run your MapReduce job using the following command: Here I got an error saying output already exists so I changed it to output1 instead as destination folder
 
 ```bash
-hadoop jar /opt/hadoop-3.2.1/share/hadoop/mapreduce/WordCountUsingHadoop-0.0.1-SNAPSHOT.jar com.example.controller.Controller /input/data/input.txt /output1
+hadoop jar /opt/hadoop-3.2.1/share/hadoop/mapreduce/DocumentSimilarity-0.0.1-SNAPSHOT.jar com.example.controller.DocumentSimilarityDriver /input/data/nput.txt /output
 ```
 
 ### 9. **View the Output**
@@ -111,7 +111,7 @@ To copy the output from HDFS to your local machine:
    exit 
    ```
     ```bash
-    docker cp resourcemanager:/opt/hadoop-3.2.1/share/hadoop/mapreduce/output1/ shared-folder/output/
+    docker cp resourcemanager:/opt/hadoop-3.2.1/share/hadoop/mapreduce/output/ shared-folder/output/
     ```
 3. Commit and push to your repo so that we can able to see your output
 
