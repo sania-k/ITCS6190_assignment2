@@ -42,15 +42,15 @@ mvn clean package
 Copy the JAR file to the Hadoop ResourceManager container:
 
 ```bash
-docker cp target/WordCountUsingHadoop-0.0.1-SNAPSHOT.jar resourcemanager:/opt/hadoop-3.2.1/share/hadoop/mapreduce/
+docker cp target/DocumentSimilarity-0.0.1-SNAPSHOT.jar resourcemanager:/opt/hadoop-3.2.1/share/hadoop/mapreduce/
 ```
 
 ### 5. **Move Dataset to Docker Container**
 
-Copy the dataset to the Hadoop ResourceManager container:
+Copy the datasets to the Hadoop ResourceManager container:
 
 ```bash
-docker cp shared-folder/input/data/input.txt resourcemanager:/opt/hadoop-3.2.1/share/hadoop/mapreduce/
+docker cp shared-folder/input/data/. resourcemanager:/opt/hadoop-3.2.1/share/hadoop/mapreduce/
 ```
 
 ### 6. **Connect to Docker Container**
@@ -75,26 +75,27 @@ Create a folder in HDFS for the input dataset:
 hadoop fs -mkdir -p /input/data
 ```
 
-Copy the input dataset to the HDFS folder:
+Copy the input datasets to the HDFS folder:
 
 ```bash
-hadoop fs -put ./input.txt /input/data
+hadoop fs -put ./input*.txt /input/data
 ```
 
 ### 8. **Execute the MapReduce Job**
 
-Run your MapReduce job using the following command: Here I got an error saying output already exists so I changed it to output1 instead as destination folder
+Run your MapReduce job using the following command: 
 
 ```bash
-hadoop jar /opt/hadoop-3.2.1/share/hadoop/mapreduce/WordCountUsingHadoop-0.0.1-SNAPSHOT.jar com.example.controller.Controller /input/data/input.txt /output1
+hadoop jar /opt/hadoop-3.2.1/share/hadoop/mapreduce/DocumentSimilarity-0.0.1-SNAPSHOT.jar com.example.controller.DocumentSimilarityDriver /input/data/input_small.txt /output_small
 ```
+For this example I am running MapReduce on imput_small, but the same works for input_med and input_large as long as you change the file name.
 
 ### 9. **View the Output**
 
 To view the output of your MapReduce job, use:
 
 ```bash
-hadoop fs -cat /output1/*
+hadoop fs -cat /output_small/*
 ```
 
 ### 10. **Copy Output from HDFS to Local OS**
@@ -103,7 +104,7 @@ To copy the output from HDFS to your local machine:
 
 1. Use the following command to copy from HDFS:
     ```bash
-    hdfs dfs -get /output1 /opt/hadoop-3.2.1/share/hadoop/mapreduce/
+    hdfs dfs -get /output_small /opt/hadoop-3.2.1/share/hadoop/mapreduce/
     ```
 
 2. use Docker to copy from the container to your local machine:
@@ -111,7 +112,7 @@ To copy the output from HDFS to your local machine:
    exit 
    ```
     ```bash
-    docker cp resourcemanager:/opt/hadoop-3.2.1/share/hadoop/mapreduce/output1/ shared-folder/output/
+    docker cp resourcemanager:/opt/hadoop-3.2.1/share/hadoop/mapreduce/output/ shared-folder/output/
     ```
 3. Commit and push to your repo so that we can able to see your output
 
@@ -125,11 +126,12 @@ To copy the output from HDFS to your local machine:
 ---
 ## Sample Input
 
-**Input from `small_dataset.txt`**
+**Input exerpt from `input_small.txt`**
 ```
-Document1 This is a sample document containing words
-Document2 Another document that also has words
-Document3 Sample text with different words
+Line1 Chapter 1: Prologue — Three Ways to Survive an Apocalypse
+Line2 There are three ways to survive an apocalypse. I have forgotten some of them now, but one thing is certain: you, who are currently reading these words, will survive.
+Line3 — Three Ways to Survive an Apocalypse [Complete]
+Line4 A web novel platform filled the screen of my old cell phone. I scrolled down, and then up again, as I attempted to refresh the page over and over.
 ```
 ## Sample Output
 
