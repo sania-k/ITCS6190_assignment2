@@ -121,7 +121,7 @@ My first issue arose because I had run out of free use of codespace, so I had to
 dock
 For designing the algorithm, I had no idea where to start so I based my code off of homework 4's word counting as a starting point. I read some documentation on how to write hadoop mapreduce functions as well. I had some confusion over Jaccard Simularity algorithm design so looked up stackoverflow and repositories on how other people implemented the logic. From there it was a lot of guessing and checking and debugging with the help of chatGPT.
 
-As per instructions, I took down and rebuilt the docker container with only one datanode to see if there was any difference in performance. When running on a single data node it took nearly four times as long to complete the job, most likely due to the lowered computational power.
+As per instructions, I took down and rebuilt the docker container with only one datanode to see if there was any difference in performance. When running on a single data node it took nearly four times as long to complete the job, most likely due to the lowered computational power. It was still able to run without issue and produced an identical output. 
 ---
 ## Sample Input
 
