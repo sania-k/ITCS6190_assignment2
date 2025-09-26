@@ -84,16 +84,15 @@ hadoop fs -put ./input*.txt /input/data
 Run your MapReduce job using the following command: 
 
 ```bash
-hadoop jar /opt/hadoop-3.2.1/share/hadoop/mapreduce/DocumentSimilarity-0.0.1-SNAPSHOT.jar com.example.controller.DocumentSimilarityDriver /input/data/input_small.txt /output_small
+hadoop jar /opt/hadoop-3.2.1/share/hadoop/mapreduce/DocumentSimilarity-0.0.1-SNAPSHOT.jar com.example.controller.DocumentSimilarityDriver /input/data/input.txt /output
 ```
-For this example I am running MapReduce on imput_small, but the same works for input_med and input_large as long as you change the file name.
 
 ### 9. **View the Output**
 
 To view the output of your MapReduce job, use:
 
 ```bash
-hadoop fs -cat /output_small/*
+hadoop fs -cat /output/*
 ```
 
 ### 10. **Copy Output from HDFS to Local OS**
@@ -102,7 +101,7 @@ To copy the output from HDFS to your local machine:
 
 1. Use the following command to copy from HDFS:
     ```bash
-    hdfs dfs -get /output_small /opt/hadoop-3.2.1/share/hadoop/mapreduce/
+    hdfs dfs -get /output /opt/hadoop-3.2.1/share/hadoop/mapreduce/
     ```
 
 2. use Docker to copy from the container to your local machine:
@@ -127,7 +126,7 @@ As per instructions, I took down and rebuilt the docker container with only one 
 ---
 ## Sample Input
 
-**Input exerpt from `input_small.txt`**
+**Input exerpt from `input.txt`**
 ```
 Line1 Chapter 1: Prologue — Three Ways to Survive an Apocalypse
 Line2 There are three ways to survive an apocalypse. I have forgotten some of them now, but one thing is certain: you, who are currently reading these words, will survive.
